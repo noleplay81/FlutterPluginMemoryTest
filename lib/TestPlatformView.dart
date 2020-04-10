@@ -19,7 +19,7 @@ class TestPlatformViewState extends State<TestPlatformView> {
       case TargetPlatform.fuchsia:
         break;
       case TargetPlatform.iOS:
-        return UiKitView(viewType: 'Test',
+        return UiKitView(viewType: 'TestPlatformView',
           onPlatformViewCreated:onPlatformCreated,
           creationParams: params,
           creationParamsCodec: const StandardMessageCodec(),
