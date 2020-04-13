@@ -1,11 +1,9 @@
 import Flutter
 import UIKit
+import heresdk
 
 public class SwiftFlutterpluginmemorytestPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-//    let channel = FlutterMethodChannel(name: "flutterpluginmemorytest", binaryMessenger: registrar.messenger())
-//    let instance = SwiftFlutterpluginmemorytestPlugin()
-//    registrar.addMethodCallDelegate(instance, channel: channel)
     let factory = MemoryTestFactory()
     registrar.register(factory, withId: "TestPlatformView")
   }
@@ -23,27 +21,21 @@ class MemoryTestFactory: NSObject, FlutterPlatformViewFactory {
 }
 
 internal class MemoryTestPlatformView: NSObject, FlutterPlatformView {
-    var testView:MemTestView?
+    var mapView:MapViewLite?
     init(frame:CGRect) {
-        super.init()
-        testView = MemTestView(frame: frame)
-        testView?.backgroundColor = UIColor(red: CGFloat(arc4random() % 255) / 255.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        let mv = MapViewLite(frame: frame)
+        mv.mapScene.loadScene(mapStyle: .normalDay) {
+            print("MapScene Load Error : \($0.debugDescription)")
+        }
+        self.mapView = mv
     }
     
     func view() -> UIView {
-        return testView!
+        return mapView!
     }
     
     deinit {
-        print("PlatformView dealloc")
-        testView?.removeFromSuperview()
-        testView = nil
+        print("PlatformView dealloc.")
     }
 }
 
-class MemTestView:UIView {
-    deinit {
-        //doesn't called. (doesn't deallocated.)
-        print("MemoryTestView dealloc")
-    }
-}

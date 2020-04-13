@@ -1,0 +1,28 @@
+sources:
+    omv_hrn:
+        type: MVT
+        url: hrn://${HERESDK_BACKEND_OMV_HRN}/{z}/{x}/{y}/${HERESDK_BACKEND_OMV_LAYER}
+        layer: ${HERESDK_BACKEND_OMV_LAYER}
+        max_zoom: 14
+
+    omv:
+        type: MVT
+        url: ${HERESDK_BACKEND_OMV_URL}
+
+    here-satellite:
+        type: Raster
+        url: ${HERESDK_BACKEND_SATELLITE_URL}
+        min_display_zoom: 2
+        max_zoom: 19
+
+    here-traffic_flow:
+        type: MVT
+        url: ${HERESDK_BACKEND_TRAFFIC_TILES_FLOW_URL}
+        # maximum supported zoom level of the traffic server
+        max_zoom: 17
+
+    here-traffic_incidents:
+        type: MVT
+        url: ${HERESDK_BACKEND_TRAFFIC_TILES_INCIDENTS_URL}
+        # maximum supported zoom level of the traffic server
+        max_zoom: 17
